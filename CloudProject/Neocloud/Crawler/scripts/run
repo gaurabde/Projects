@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+/home/ubuntu/nutch/bin/nutch crawl /home/ubuntu/nutch/urls -dir /home/ubuntu/nutch/crawl -depth 1 -topN 1
+/home/ubuntu/nutch/bin/nutch readdb /home/ubuntu/nutch/crawl/crawldb -dump /home/ubuntu/nutch/crawldb 
+/home/ubuntu/nutch/bin/nutch readlinkdb /home/ubuntu/nutch/crawl/linkdb -dump /home/ubuntu/nutch/linkdb
+
+mkdir -p /home/ubuntu/nutch/seg
+iteration=`ls /home/ubuntu/nutch/crawl/segments/`
+echo $iteration
+
+for i in $iteration
+  do
+  variable=`ls -rt /home/ubuntu/nutch/crawl/segments/ | head -$i | tail -1`
+  /home/ubuntu/nutch/bin/nutch readseg -dump /home/ubuntu/nutch/crawl/segments/$variable /home/ubuntu/nutch/seg/$i
+  cat /home/ubuntu/nutch/seg/$i/dump >> /home/ubuntu/nutch/seg/dump
+done
+
+TARGET=`cat /home/ubuntu/nutch/urls/seed.txt | sed 's/http:\/\/www.//g'`
+DATE=`date +%F_%T_%S`
+
+s3cmd mb s3://kyuhojeong/DEMO/$TARGET/
+s3cmd mb s3://kyuhojeong/DEMO/$TARGET/$DATE/
+s3cmd put --recursive /home/ubuntu/nutch/seg /home/ubuntu/nutch/linkdb /home/ubuntu/nutch/crawldb /home/ubuntu/nutch/crawl s3://kyuhojeong/DEMO/$TARGET/$DATE/
+
+

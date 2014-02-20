@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+	<package name="default"  extends="struts-default">
+	
+		<action name="Login">
+			<result>pages/login.jsp</result>
+		</action>
+		<action name="Welcome" class="WelcomeUserAction">
+			<result name="SUCCESS">pages/welcome_user.jsp</result>
+			<result name="FAILURE">pages/failure_user.jsp</result>
+		</action>
+		<action name="SearchProductList" class="SearctProductListAction">
+			<result name="SUCCESS">pages/results.jsp</result>
+			<result name="FAILURE">pages/failure_search.jsp</result>
+		</action>
+		<action name="RegistrationPage" class="RegistrationPageAction">
+			<result name="SUCCESS">pages/registrationPage.jsp</result>
+		</action>
+		<action name="RegisterInDB" class="RegisterInDBAction">
+			<result name="SUCCESS">pages/registrationSuccess.jsp</result>
+			<result name="FAILURE">pages/registrationFailure.jsp</result>
+		</action>
+	</package>
+ 
+</struts>
+

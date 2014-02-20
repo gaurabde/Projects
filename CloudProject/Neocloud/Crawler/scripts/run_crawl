@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+PRIVATE_KEY_FILE="../../../Cloud.pem"
+EBAY="ubuntu@54.242.23.131"
+AMAZON="ubuntu@54.224.84.191"
+WALMART="ubuntu@23.22.194.103"
+BESTBUY="ubuntu@23.22.167.212"
+
+#RUN CRAWL
+scp -i $PRIVATE_KEY_FILE -r ./run $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $BESTBUY:nutch/
+ssh -i ../../../Cloud.pem $AMAZON 'rm -rf /home/ubuntu/nutch/crawl /home/ubuntu/nutch/crawldb /home/ubuntu/nutch/linkdb /home/ubuntu/nutch/seg' 
+ssh -i ../../../Cloud.pem $AMAZON 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/; /home/ubuntu/nutch/run' &
+ssh -i ../../../Cloud.pem $EBAY 'rm -rf /home/ubuntu/nutch/crawl /home/ubuntu/nutch/crawldb /home/ubuntu/nutch/linkdb /home/ubuntu/nutch/seg' 
+ssh -i ../../../Cloud.pem $EBAY 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/; /home/ubuntu/nutch/run' &
+ssh -i ../../../Cloud.pem $WALMART 'rm -rf /home/ubuntu/nutch/crawl /home/ubuntu/nutch/crawldb /home/ubuntu/nutch/linkdb /home/ubuntu/nutch/seg' 
+ssh -i ../../../Cloud.pem $WALMART 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/; /home/ubuntu/nutch/run' &
+ssh -i ../../../Cloud.pem $BESTBUY 'rm -rf /home/ubuntu/nutch/crawl /home/ubuntu/nutch/crawldb /home/ubuntu/nutch/linkdb /home/ubuntu/nutch/seg' 
+ssh -i ../../../Cloud.pem $BESTBUY 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/; /home/ubuntu/nutch/run' &
+

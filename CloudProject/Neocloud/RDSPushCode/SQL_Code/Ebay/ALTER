@@ -1,0 +1,6 @@
+ALTER TABLE ebay
+MODIFY COLUMN url varchar(255);
+
+ALTER TABLE ebay
+MODIFY COLUMN name varchar(255);
+

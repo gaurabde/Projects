@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+../bin/nutch crawl urls -dir crawl -depth 1 -topN 1
+../bin/nutch readdb crawl/crawldb -dump crawldb 
+../bin/nutch readlinkdb crawl/linkdb -dump linkdb
+
+mkdir -p seg
+iteration=`ls crawl/segments/`
+echo $iteration
+
+for i in $iteration
+  do
+  variable=`ls -rt crawl/segments/ | head -$i | tail -1`
+  ../bin/nutch readseg -dump crawl/segments/$variable seg/$i
+  cat seg/$i/dump >> seg/dump
+done
+
+

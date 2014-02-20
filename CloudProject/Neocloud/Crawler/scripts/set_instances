@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+
+PRIVATE_KEY_FILE="../../../Cloud.pem"
+EBAY="ubuntu@54.242.23.131"
+AMAZON="ubuntu@54.224.84.191"
+WALMART="ubuntu@23.22.194.103"
+BESTBUY="ubuntu@23.22.167.212"
+
+#SETUP EBAY INSTANCE
+ssh -i ../../../Cloud.pem $EBAY 'mkdir /home/ubuntu/nutch'
+scp -i $PRIVATE_KEY_FILE -r .s3cfg $EBAY:/home/ubuntu/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/lib $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/bin $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/plugins $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/urls $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/conf $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/logs $EBAY:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $EBAY:nutch/
+
+ssh -i ../../../Cloud.pem $EBAY 'sudo apt-get update'
+ssh -i ../../../Cloud.pem $EBAY 'sudo apt-get install -y openjdk-6-jre-headless s3cmd'
+ssh -i ../../../Cloud.pem $EBAY 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/'
+ssh -i ../../../Cloud.pem $EBAY 'echo http://www.ebay.com > /home/ubuntu/nutch/urls/seed.txt'
+#ssh -i ../../../Cloud.pem $EBAY '/home/ubuntu/nutch/run'
+
+#SETUP WALMART INSTANCE
+ssh -i ../../../Cloud.pem $WALMART 'mkdir /home/ubuntu/nutch'
+scp -i $PRIVATE_KEY_FILE -r .s3cfg $WALMART:/home/ubuntu/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/lib $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/bin $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/plugins $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/urls $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/conf $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/logs $WALMART:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $WALMART:nutch/
+
+ssh -i ../../../Cloud.pem $WALMART 'sudo apt-get update'
+ssh -i ../../../Cloud.pem $WALMART 'sudo apt-get install -y openjdk-6-jre-headless s3cmd'
+ssh -i ../../../Cloud.pem $WALMART 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/'
+ssh -i ../../../Cloud.pem $WALMART 'echo http://www.walmart.com > /home/ubuntu/nutch/urls/seed.txt'
+#ssh -i ../../../Cloud.pem $WALMART '/home/ubuntu/nutch/run'
+
+#SETUP BESTBUY INSTANCE
+ssh -i ../../../Cloud.pem $BESTBUY 'mkdir /home/ubuntu/nutch'
+scp -i $PRIVATE_KEY_FILE -r .s3cfg $BESTBUY:/home/ubuntu/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/lib $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/bin $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/plugins $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/urls $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/conf $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r /usr/local/apache-nutch-1.7/logs $BESTBUY:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $BESTBUY:nutch/
+
+ssh -i ../../../Cloud.pem $BESTBUY 'sudo apt-get update'
+ssh -i ../../../Cloud.pem $BESTBUY 'sudo apt-get install -y openjdk-6-jre-headless s3cmd'
+ssh -i ../../../Cloud.pem $BESTBUY 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/'
+ssh -i ../../../Cloud.pem $BESTBUY 'echo http://www.bestbuy.com > /home/ubuntu/nutch/urls/seed.txt'
+#ssh -i ../../../Cloud.pem $BESTBUY '/home/ubuntu/nutch/run'
+
+#SETUP AMAZON INSTANCE
+ssh -i ../../../Cloud.pem $AMAZON 'mkdir /home/ubuntu/nutch'
+scp -i $PRIVATE_KEY_FILE -r .s3cfg $AMAZON:/home/ubuntu/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/lib $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/bin $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/plugins $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/urls $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/conf $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r /home/kyuho/nutch/apache-nutch-1.7/runtime/local/logs $AMAZON:nutch/
+scp -i $PRIVATE_KEY_FILE -r ./run $AMAZON:nutch/
+
+ssh -i ../../../Cloud.pem $AMAZON 'sudo apt-get update'
+ssh -i ../../../Cloud.pem $AMAZON 'sudo apt-get install -y openjdk-6-jre-headless s3cmd'
+ssh -i ../../../Cloud.pem $AMAZON 'export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64/'
+ssh -i ../../../Cloud.pem $AMAZON 'mkdir /home/ubuntu/nutch/urls'
+ssh -i ../../../Cloud.pem $AMAZON 'echo http://www.amazon.com > /home/ubuntu/nutch/urls/seed.txt'
+#ssh -i ../../../Cloud.pem $AMAZON '/home/ubuntu/nutch/run'
+
+
+

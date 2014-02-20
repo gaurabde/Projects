@@ -1,0 +1,9 @@
+//rs=stmt.executeQuery("DESCRIBE ebay;");
+			
+			//System.out.println("EBAY:"+(String)rs.getObject(1));
+			
+			//stmt.executeUpdate("ALTER TABLE ebay MODIFY COLUMN url varchar(255);");
+			//stmt.executeUpdate("INSERT INTO ebay VALUES (\"NeoCloud\",\"www.bestprice.com\",\"$1000\");");
+			rs=stmt.executeQuery("SELECT * FROM ebay;");
+			rs.next();
+			System.out.println((String)rs.getObject(1)+" "+(String)rs.getObject(2)+" "+(String)rs.getObject(3));

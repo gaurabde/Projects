@@ -1,0 +1,4 @@
+table ebay( name varchar(50),  price varchar(50),  url varchar(50));
+table amazon( name varchar(50),  price varchar(50),  url varchar(50));
+table bestbuy( name varchar(50),  price varchar(50),  url varchar(50));
+table walmart( name varchar(50),  price varchar(50),  url varchar(50));
